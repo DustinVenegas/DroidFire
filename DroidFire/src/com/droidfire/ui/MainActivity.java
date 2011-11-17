@@ -17,12 +17,10 @@ public class MainActivity extends Activity {
         
         SharedPreferences credentials = this.getSharedPreferences("credentials", MODE_PRIVATE);
         String token = credentials.getString("token", "");
-        if (token != "") {  //If we have the information, send on to the room list
+        if (token == "") {  //If we dont, show the login information
+        	setContentView(R.layout.main);
+        } else { 			//If we have the information, send on to the room list
         	
-        } else { 			//If we dont, show the login information
-        	
-        }
-        
-        setContentView(R.layout.main);
+        }        
     }
 }
