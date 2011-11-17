@@ -1,4 +1,7 @@
-package com.droidfire;
+package com.droidfire.ui;
+
+import com.droidfire.R;
+import com.droidfire.R.layout;
 
 import android.app.Activity;
 import android.os.Bundle;
