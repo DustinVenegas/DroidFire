@@ -28,8 +28,13 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
 	@Override
-	public void onClick(View arg0) {
-		// TODO Auto-generated method stub
-		
+	public void onClick(View view) {
+		switch(view.getId()) {
+		case R.id.loginButton:
+			
+			break;
+		default:
+			break;
+		}		
 	}
 }
