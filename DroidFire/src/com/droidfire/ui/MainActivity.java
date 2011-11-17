@@ -5,22 +5,31 @@ import com.droidfire.R;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnClickListener {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        
-        //Check to see if user token and url are stored
-        
+                
+        //Check to see if user token and url are stored        
         SharedPreferences credentials = this.getSharedPreferences("credentials", MODE_PRIVATE);
         String token = credentials.getString("token", "");
         if (token == "") {  //If we dont, show the login information
         	setContentView(R.layout.main);
+        	Button loginButton = (Button)findViewById(R.id.loginButton);
+        	loginButton.setOnClickListener(this);
         } else { 			//If we have the information, send on to the room list
         	
         }        
     }
+
+	@Override
+	public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 }
