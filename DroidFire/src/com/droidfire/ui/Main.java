@@ -3,6 +3,7 @@ package com.droidfire.ui;
 import com.droidfire.R;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +24,10 @@ public class Main extends Activity implements OnClickListener {
         	Button loginButton = (Button)findViewById(R.id.loginButton);
         	loginButton.setOnClickListener(this);
         } else { 			//If we have the information, send on to the room list
-        	
+        	Intent loadRooms = new Intent(this, Rooms.class);
+        	loadRooms.putExtra("token", token);
+        	startActivity(loadRooms);
+        	this.finish();
         }        
     }
 
