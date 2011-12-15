@@ -1,5 +1,7 @@
 package com.droidfire.campfire;
 
+import java.util.List;
+
 import android.net.Uri;
 
 public class Site {
@@ -19,7 +21,7 @@ public class Site {
 		throw new UnsupportedOperationException(); 
 	}
 	
-	public Room[] getRooms() {
+	public List<Room> getRooms() {
 		//Not yet implemented
 		throw new UnsupportedOperationException();
 	}
