@@ -7,9 +7,15 @@ import android.net.Uri;
 public class Site {
 	
 	private Uri mSite;
+	private String mToken;
 	
 	public Site(Uri site) {
 		mSite = site;
+	}
+	
+	public Site(Uri site, String token) {
+		mSite = site;
+		mToken = token;
 	}
 	
 	public String login(String userName, String password) {
