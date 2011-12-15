@@ -9,11 +9,12 @@ public class Request {
 	}
 	
 	public Request(String username, String password) {
-		//authenticate
+		//Not yet implemented
 		throw new UnsupportedOperationException();
 	}
 	
 	public void post(Object data) {
+		//Not yet implemented
 		throw new UnsupportedOperationException();
 	}
 }

@@ -1,5 +1,8 @@
 package com.droidfire.campfire;
 
-public final class Room {
+public class Room {
+	
+	Room(String token) {
 		
+	}
 }

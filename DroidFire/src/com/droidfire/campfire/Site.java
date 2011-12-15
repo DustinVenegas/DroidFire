@@ -16,4 +16,13 @@ public class Site {
 		throw new UnsupportedOperationException();
 	}
 	
+	public Room getRoom(int id) {
+		//Not yet implemented
+		throw new UnsupportedOperationException(); 
+	}
+	
+	public Room[] getRooms() {
+		//Not yet implemented
+		throw new UnsupportedOperationException();
+	}
 }
