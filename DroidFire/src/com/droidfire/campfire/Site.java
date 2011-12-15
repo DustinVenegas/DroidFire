@@ -1,15 +1,13 @@
 package com.droidfire.campfire;
 
+import android.net.Uri;
+
 public class Site {
 	
-	private String mToken;
+	private Uri mSite;
 	
-	public Site() {
-		
-	}
-	
-	public Site(String token) {
-		mToken = token;
+	public Site(Uri site) {
+		mSite = site;
 	}
 	
 	public String login(String userName, String password) {

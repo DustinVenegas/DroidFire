@@ -9,13 +9,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class Main extends Activity implements OnClickListener {
-    /** Called when the activity is first created. */
+    
+	private EditText mSiteName;
+	private EditText mUsername;
+	private EditText mPassword;	
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-                
+        setContentView(R.layout.main);        
+        
         //Check to see if user token and url are stored        
         SharedPreferences credentials = this.getSharedPreferences("credentials", MODE_PRIVATE);
         String token = credentials.getString("token", "");
