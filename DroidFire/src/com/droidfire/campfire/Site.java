@@ -25,4 +25,8 @@ public class Site {
 		//Not yet implemented
 		throw new UnsupportedOperationException();
 	}
+	
+	public Uri getSite() {
+		return mSite;
+	}
 }

@@ -32,7 +32,7 @@ public class Main extends Activity implements OnClickListener {
         	Button loginButton = (Button)findViewById(R.id.loginButton);
         	loginButton.setOnClickListener(this);
         } else { 			//If we have the information, send on to the room list
-        	showRoomsList(token);
+        	showRoomsList(token, Uri.parse("http://" + mSiteName.getText() + ".campfirenow.com"));
         }        
     }
 
@@ -40,10 +40,11 @@ public class Main extends Activity implements OnClickListener {
 	public void onClick(View view) {
 		switch(view.getId()) {
 		case R.id.loginButton:
-			Site site = new Site(Uri.parse("http://" + mSiteName.getText() + ".campfirenow.com"));
+			Uri siteLocation = Uri.parse("http://" + mSiteName.getText() + ".campfirenow.com");
+			Site site = new Site(siteLocation);
 			String token = site.login(mUsername.getText().toString(), mPassword.getText().toString());
 			if (!token.equals("")) { 	//Successful login
-				showRoomsList(token);
+				showRoomsList(token, siteLocation);
 			} else {					//Unsuccessful login
 				
 			}
@@ -53,9 +54,10 @@ public class Main extends Activity implements OnClickListener {
 		}		
 	}
 	
-	private void showRoomsList(String token) {
+	private void showRoomsList(String token, Uri site) {
 		Intent loadRooms = new Intent(this, Rooms.class);
     	loadRooms.putExtra("token", token);
+    	loadRooms.putExtra("site", site.toString());
     	startActivity(loadRooms);
     	this.finish();
 	}
