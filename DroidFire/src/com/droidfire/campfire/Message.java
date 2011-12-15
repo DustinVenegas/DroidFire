@@ -1,25 +1,14 @@
 package com.droidfire.campfire;
 
-public class Message {
-	private String to;
-	private String from;
-	private String content;
+public abstract class Message {
 	
-	public Message(String to, String from, String content) {
-		this.to = to;
-		this.from = from;
-		this.content = content;
+	private int mId;
+	private int mRoomId;
+	private int mUserId;
+	private String mBody;
+	
+	public int getId() {
+		return mId;
 	}
 	
-	public String getTo() {
-		return this.to;
-	}
-	
-	public String getFrom() {
-		return this.from;
-	}
-	
-	public String getContent() {
-		return this.content;
-	}
 }
