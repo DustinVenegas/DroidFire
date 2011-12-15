@@ -29,4 +29,14 @@ public class Room {
 	public List<User> getUsers() {
 		return mUsers;
 	}
+	
+	public void join() {
+		//Not yet implemented
+		throw new UnsupportedOperationException();
+	}
+	
+	public void speak(Message message) {
+		//Not yet implemented
+		throw new UnsupportedOperationException();
+	}
 }
