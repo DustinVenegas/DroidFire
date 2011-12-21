@@ -35,9 +35,15 @@ class Request {
 	public Response getResponse(URI target) {
 		HttpHost targetHost = new HttpHost(target.getHost(), target.getPort(), target.getScheme());
 		DefaultHttpClient client = new DefaultHttpClient();
-		client.getCredentialsProvider().setCredentials(
-				new AuthScope(targetHost.getHostName(), targetHost.getPort()), 
-				new UsernamePasswordCredentials(mUsername, mPassword));		
+		if (token == null || token.equals("")) {
+			client.getCredentialsProvider().setCredentials(
+					new AuthScope(targetHost.getHostName(), targetHost.getPort()), 
+					new UsernamePasswordCredentials(mUsername, mPassword));
+		} else {
+			client.getCredentialsProvider().setCredentials(
+					new AuthScope(targetHost.getHostName(), targetHost.getPort()), 
+					new UsernamePasswordCredentials(token, "X"));
+		}
 		HttpGet request = new HttpGet(target);
 		
 		Response result = null;
