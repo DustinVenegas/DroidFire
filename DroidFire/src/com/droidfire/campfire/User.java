@@ -38,7 +38,7 @@ public class User {
 		return mToken;
 	}
 	
-	public static User serializeFromJson(JSONObject object) throws JSONException {
+	static User serializeFromJson(JSONObject object) throws JSONException {
 		JSONObject userJson = object.getJSONObject("user");
 		
 		int id = userJson.getInt("id");
