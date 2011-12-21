@@ -1,12 +1,13 @@
 package com.droidfire.ui;
 
+import java.net.URI;
+
 import com.droidfire.R;
 import com.droidfire.campfire.Site;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,7 +33,7 @@ public class Main extends Activity implements OnClickListener {
         	Button loginButton = (Button)findViewById(R.id.loginButton);
         	loginButton.setOnClickListener(this);
         } else { 			//If we have the information, send on to the room list
-        	showRoomsList(token, Uri.parse("http://" + mSiteName.getText() + ".campfirenow.com"));
+        	showRoomsList(token, URI.create("http://" + mSiteName.getText() + ".campfirenow.com"));
         }        
     }
 
@@ -40,7 +41,7 @@ public class Main extends Activity implements OnClickListener {
 	public void onClick(View view) {
 		switch(view.getId()) {
 		case R.id.loginButton:
-			Uri siteLocation = Uri.parse("http://" + mSiteName.getText() + ".campfirenow.com");
+			URI siteLocation = URI.create("http://" + mSiteName.getText() + ".campfirenow.com");
 			Site site = new Site(siteLocation);
 			String token = site.login(mUsername.getText().toString(), mPassword.getText().toString());
 			if (!token.equals("")) { 	//Successful login
@@ -54,7 +55,7 @@ public class Main extends Activity implements OnClickListener {
 		}		
 	}
 	
-	private void showRoomsList(String token, Uri site) {
+	private void showRoomsList(String token, URI site) {
 		Intent loadRooms = new Intent(this, Rooms.class);
     	loadRooms.putExtra("token", token);
     	loadRooms.putExtra("site", site.toString());
