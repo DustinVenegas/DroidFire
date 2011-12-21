@@ -32,17 +32,17 @@ public class Site {
 		Request request = new Request(userName, password);
 		Response response = request.getResponse(URI.create(mSite.toString() + "/users/me.json"));
 
-		String token = null;
+		mToken = null;
 		if (response.getData() != null) {
 			try {
 				User user = User.serializeFromJson(response.getData());			
-				token = user.getToken();
+				mToken = user.getToken();
 			} catch(JSONException ex) {
 				ex.printStackTrace();
 			}
 		}
 		
-		return token;
+		return mToken;
 	}
 	
 	public Room getRoom(int id) {
