@@ -16,8 +16,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
-
 class Request {
 	
 	private String token;
@@ -46,9 +44,8 @@ class Request {
 		try {
 			HttpResponse httpResponse = client.execute(targetHost, request);
 			JSONObject data = serializeToJson(httpResponse.getEntity().getContent());
-			if (data != null) {
-				result = new Response(data, httpResponse.getStatusLine().getStatusCode());
-			}			
+			result = new Response(data, httpResponse.getStatusLine().getStatusCode());
+			
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

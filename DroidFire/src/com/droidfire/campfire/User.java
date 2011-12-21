@@ -1,5 +1,6 @@
 package com.droidfire.campfire;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class User {
@@ -8,6 +9,14 @@ public class User {
 	private int mId;
 	private String mName;
 	private String mToken;
+	
+	public User(boolean isAdmin, String email, int id, String name, String token) {
+		mIsAdmin = isAdmin;
+		mEmail = email;
+		mId = id;
+		mName = name;
+		mToken = token;
+	}
 	
 	public boolean isAdmin() {
 		return mIsAdmin;
@@ -29,7 +38,15 @@ public class User {
 		return mToken;
 	}
 	
-	public static User serializeFromJson(JSONObject object) {
-		throw new UnsupportedOperationException();
+	public static User serializeFromJson(JSONObject object) throws JSONException {
+		JSONObject userJson = object.getJSONObject("user");
+		
+		int id = userJson.getInt("id");
+		String name = userJson.getString("name");
+		String email = userJson.getString("email_address");
+		boolean isAdmin = userJson.getBoolean("admin");
+		String token = userJson.getString("api_auth_token");
+		
+		return new User(isAdmin, email, id, name, token);
 	}
 }
