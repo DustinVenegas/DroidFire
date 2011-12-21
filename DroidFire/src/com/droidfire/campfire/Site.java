@@ -3,6 +3,8 @@ package com.droidfire.campfire;
 import java.net.URI;
 import java.util.List;
 
+import org.json.JSONException;
+
 public class Site {
 	
 	private URI mSite;
@@ -32,8 +34,12 @@ public class Site {
 
 		String token = null;
 		if (response.getData() != null) {
-			User user = User.serializeFromJson(response.getData());
-			token = user.getToken();
+			try {
+				User user = User.serializeFromJson(response.getData());			
+				token = user.getToken();
+			} catch(JSONException ex) {
+				ex.printStackTrace();
+			}
 		}
 		
 		return token;
