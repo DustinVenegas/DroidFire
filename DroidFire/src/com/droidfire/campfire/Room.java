@@ -49,13 +49,16 @@ public class Room {
 	}
 	
 	static Room serializeFromJson(JSONObject object) throws JSONException {
-		JSONObject roomJson = object.getJSONObject("room");
-		int id = roomJson.getInt("id");
-		String name = roomJson.getString("name");
-		String topic = roomJson.getString("topic");
+		if (object.has("room")) {
+			object = object.getJSONObject("room");
+		}
+		
+		int id = object.getInt("id");
+		String name = object.getString("name");
+		String topic = object.getString("topic");
 		List<User> users = null;
-		if (roomJson.has("users")) {
-			JSONArray usersJson = roomJson.getJSONArray("users");
+		if (object.has("users")) {
+			JSONArray usersJson = object.getJSONArray("users");
 			users = new ArrayList<User>();
 			for(int i = 0; i < usersJson.length(); i++) {
 				users.add(User.serializeFromJson(usersJson.getJSONObject(i)));
