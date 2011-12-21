@@ -44,7 +44,7 @@ public class Main extends Activity implements OnClickListener {
 			URI siteLocation = URI.create("http://" + mSiteName.getText() + ".campfirenow.com");
 			Site site = new Site(siteLocation);
 			String token = site.login(mUsername.getText().toString(), mPassword.getText().toString());
-			if (!token.equals("")) { 	//Successful login
+			if (token != null) { 	//Successful login
 				showRoomsList(token, siteLocation);
 			} else {					//Unsuccessful login
 				
