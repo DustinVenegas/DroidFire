@@ -1,8 +1,10 @@
 package com.droidfire.campfire;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 
 public class Site {
@@ -46,13 +48,37 @@ public class Site {
 	}
 	
 	public Room getRoom(int id) {
-		//Not yet implemented
-		throw new UnsupportedOperationException(); 
+		Room room = null;
+		
+		Response response = new Request(mToken).getResponse(URI.create(mSite.toString() + "/rooms/" + id + ".json"));
+		if (response.getData() != null) {
+			try {
+				room = Room.serializeFromJson(response.getData());
+			} catch(JSONException ex) {
+				ex.printStackTrace();
+			}
+		}
+		
+		return room;
 	}
 	
 	public List<Room> getRooms() {
-		//Not yet implemented
-		throw new UnsupportedOperationException();
+		List<Room> rooms = null;
+		
+		Response response = new Request(mToken).getResponse(URI.create(mSite.toString() + "/rooms.json"));
+		if (response.getData() != null) {
+			try {
+				rooms = new ArrayList<Room>();
+				JSONArray roomsJson = response.getData().getJSONArray("rooms");
+				for(int i = 0; i < roomsJson.length(); i++) {
+					rooms.add(Room.serializeFromJson(roomsJson.getJSONObject(i)));
+				}
+			} catch(JSONException ex) {
+				ex.printStackTrace();
+			}
+		}
+		
+		return rooms;
 	}
 	
 	public URI getSite() {
