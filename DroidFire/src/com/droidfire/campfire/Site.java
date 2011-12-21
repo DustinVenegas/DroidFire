@@ -1,20 +1,7 @@
 package com.droidfire.campfire;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.List;
-
-import org.apache.http.HttpHost;
-import org.apache.http.HttpResponse;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONObject;
-
-import android.util.Log;
 
 public class Site {
 	
@@ -30,11 +17,26 @@ public class Site {
 		mToken = token;
 	}
 	
+	/**
+	 * Attempts to log the user into the current site with the given username and password.
+	 * If successful this method returns the auth token associated with the user, otherwise
+	 * it will return null indicating that a failure of some kind occurred.
+	 * 
+	 * @param userName	The username used to log into campfire
+	 * @param password	The password used to log into campfire
+	 * @return 			The api token associated with the user if successful, otherwise null
+	 */
 	public String login(String userName, String password) {
 		Request request = new Request(userName, password);
 		Response response = request.getResponse(URI.create(mSite.toString() + "/users/me.json"));
+
+		String token = null;
+		if (response.getData() != null) {
+			User user = User.serializeFromJson(response.getData());
+			token = user.getToken();
+		}
 		
-		throw new UnsupportedOperationException();
+		return token;
 	}
 	
 	public Room getRoom(int id) {

@@ -45,7 +45,10 @@ class Request {
 		Response result = null;
 		try {
 			HttpResponse httpResponse = client.execute(targetHost, request);
-			result = new Response(serializeToJson(httpResponse.getEntity().getContent()), httpResponse.getStatusLine().getStatusCode());
+			JSONObject data = serializeToJson(httpResponse.getEntity().getContent());
+			if (data != null) {
+				result = new Response(data, httpResponse.getStatusLine().getStatusCode());
+			}			
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,8 +56,8 @@ class Request {
 			// TODO Auto-generated catch block
 			e.printStackTrace();			
 		}
-		
-		throw new UnsupportedOperationException();
+
+		return result;
 	}
 	
 	private static JSONObject serializeToJson(InputStream stream) {
