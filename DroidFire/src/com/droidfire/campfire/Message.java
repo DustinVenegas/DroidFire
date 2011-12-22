@@ -4,10 +4,10 @@ import org.json.JSONObject;
 
 public abstract class Message {
 	
-	private int mId;
-	private int mRoomId;
-	private int mUserId;
-	private String mBody;
+	protected int mId;
+	protected int mRoomId;
+	protected int mUserId;
+	protected String mBody;
 	
 	public int getId() {
 		return mId;
