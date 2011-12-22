@@ -55,6 +55,7 @@ public class Site {
 			try {
 				room = Room.serializeFromJson(response.getData());
 				room.setToken(mToken);
+				room.setSite(this);
 			} catch(JSONException ex) {
 				ex.printStackTrace();
 			}
@@ -74,6 +75,7 @@ public class Site {
 				for(int i = 0; i < roomsJson.length(); i++) {
 					Room room = Room.serializeFromJson(roomsJson.getJSONObject(i));
 					room.setToken(mToken);
+					room.setSite(this);
 					rooms.add(room);
 				}
 			} catch(JSONException ex) {

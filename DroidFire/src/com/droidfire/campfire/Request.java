@@ -89,8 +89,9 @@ class Request {
 		try {
 			HttpPost request = new HttpPost(target);
 			request.setHeader("Content-Type", "application/json");
+			request.setHeader("Accept", "application/json");
+			
 			StringEntity entity = new StringEntity(json.toString());
-			entity.setContentType("text/json");
 			request.setEntity(entity);
 			
 			HttpResponse httpResponse = client.execute(targetHost, request);
@@ -98,10 +99,8 @@ class Request {
 			result = new Response(data, httpResponse.getStatusLine().getStatusCode());
 			
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();			
 		}
 
@@ -113,13 +112,10 @@ class Request {
 		try {
 			result = new JSONObject(EntityUtils.toString(entity));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

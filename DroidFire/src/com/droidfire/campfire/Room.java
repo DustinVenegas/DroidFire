@@ -1,6 +1,7 @@
 package com.droidfire.campfire;
 
 import java.net.URI;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,14 +61,29 @@ public class Room {
 		}
 	}
 	
+	void setSite(Site site) {
+		mSite = site;
+	}
+	
 	void setToken(String token) {
 		mToken = token;
 	}
 		
-	public void speak(Message message) {
+	public void speak(Message message) throws Exception {
+		if (message == null) {
+			throw new IllegalArgumentException("Message cannot be null.");
+		}
+		
+		JSONObject content = message.toJSONObject();		
+		if (content.equals(new JSONObject())) {
+			throw new IllegalArgumentException("Message cannot be empty.");
+		}
+		
 		if (mHasJoined) {
-			Response response = new Request(mToken).post(URI.create(mSite.getSite() + "/room" + mId + "/speak.json"), message.toJSONObject());
-			throw new UnsupportedOperationException();
+			Response response = new Request(mToken).post(URI.create(mSite.getSite() + "/room/" + mId + "/speak.json"), content);
+			if (response.getStatus() != 201) {
+				throw new Exception("An error occurred while attemping to speak in the room. HTTP status code: " + response.getStatus());
+			}
 		} else {
 			throw new IllegalStateException("Must join the room before being able to speak.");
 		}		
