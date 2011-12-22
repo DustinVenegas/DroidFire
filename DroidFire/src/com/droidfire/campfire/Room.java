@@ -51,7 +51,7 @@ public class Room {
 	 * Attempts to join this room. If successful returns true, otherwise false.	 * 
 	 */
 	public boolean join() {
-		Response response = new Request(mToken).get(URI.create(mSite.getSite() + "/room/" + mId + "/join.json"));
+		Response response = new Request(mToken).post(URI.create(mSite.getSite() + "/room/" + mId + "/join.json"));
 		if (response.getStatus() == 200) {
 			mHasJoined = true;
 			return true;
@@ -66,6 +66,7 @@ public class Room {
 		
 	public void speak(Message message) {
 		if (mHasJoined) {
+			Response response = new Request(mToken).post(URI.create(mSite.getSite() + "/room" + mId + "/speak.json"), message.toJSONObject());
 			throw new UnsupportedOperationException();
 		} else {
 			throw new IllegalStateException("Must join the room before being able to speak.");
