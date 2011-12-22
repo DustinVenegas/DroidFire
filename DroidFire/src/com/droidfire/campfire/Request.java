@@ -32,7 +32,7 @@ class Request {
 		mPassword = password;
 	}
 	
-	public Response getResponse(URI target) {
+	public Response get(URI target) {
 		HttpHost targetHost = new HttpHost(target.getHost(), target.getPort(), target.getScheme());
 		DefaultHttpClient client = new DefaultHttpClient();
 		if (token == null || token.equals("")) {

@@ -32,7 +32,7 @@ public class Site {
 	 */
 	public String login(String userName, String password) {
 		Request request = new Request(userName, password);
-		Response response = request.getResponse(URI.create(mSite.toString() + "/users/me.json"));
+		Response response = request.get(URI.create(mSite.toString() + "/users/me.json"));
 
 		mToken = null;
 		if (response.getData() != null) {
@@ -50,7 +50,7 @@ public class Site {
 	public Room getRoom(int id) {
 		Room room = null;
 		
-		Response response = new Request(mToken).getResponse(URI.create(mSite.toString() + "/rooms/" + id + ".json"));
+		Response response = new Request(mToken).get(URI.create(mSite.toString() + "/rooms/" + id + ".json"));
 		if (response.getData() != null) {
 			try {
 				room = Room.serializeFromJson(response.getData());
@@ -66,7 +66,7 @@ public class Site {
 	public List<Room> getRooms() {
 		List<Room> rooms = null;
 		
-		Response response = new Request(mToken).getResponse(URI.create(mSite.toString() + "/rooms.json"));
+		Response response = new Request(mToken).get(URI.create(mSite.toString() + "/rooms.json"));
 		if (response.getData() != null) {
 			try {
 				rooms = new ArrayList<Room>();

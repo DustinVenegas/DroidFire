@@ -51,7 +51,7 @@ public class Room {
 	 * Attempts to join this room. If successful returns true, otherwise false.	 * 
 	 */
 	public boolean join() {
-		Response response = new Request(mToken).getResponse(URI.create(mSite.getSite() + "/room/" + mId + "/join.json"));
+		Response response = new Request(mToken).get(URI.create(mSite.getSite() + "/room/" + mId + "/join.json"));
 		if (response.getStatus() == 200) {
 			mHasJoined = true;
 			return true;
