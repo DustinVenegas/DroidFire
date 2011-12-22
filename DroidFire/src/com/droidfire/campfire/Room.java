@@ -1,5 +1,6 @@
 package com.droidfire.campfire;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,10 @@ import org.json.JSONObject;
 
 public class Room {
 	
+	private String mToken;
+	private Site mSite;
+	
+	private boolean mHasJoined;
 	private int mId;
 	private String mName;
 	private String mTopic;
@@ -30,6 +35,10 @@ public class Room {
 		return mName;
 	}
 	
+	public List<Message> getMessages() {
+		throw new UnsupportedOperationException();
+	}
+	
 	public String getTopic() {
 		return mTopic;
 	}
@@ -38,14 +47,29 @@ public class Room {
 		return mUsers;
 	}
 	
-	public void join() {
-		//Not yet implemented
-		throw new UnsupportedOperationException();
+	/**
+	 * Attempts to join this room. If successful returns true, otherwise false.	 * 
+	 */
+	public boolean join() {
+		Response response = new Request(mToken).getResponse(URI.create(mSite.getSite() + "/room/" + mId + "/join.json"));
+		if (response.getStatus() == 200) {
+			mHasJoined = true;
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
+	void setToken(String token) {
+		mToken = token;
+	}
+		
 	public void speak(Message message) {
-		//Not yet implemented
-		throw new UnsupportedOperationException();
+		if (mHasJoined) {
+			throw new UnsupportedOperationException();
+		} else {
+			throw new IllegalStateException("Must join the room before being able to speak.");
+		}		
 	}
 	
 	static Room serializeFromJson(JSONObject object) throws JSONException {

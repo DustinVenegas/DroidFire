@@ -54,6 +54,7 @@ public class Site {
 		if (response.getData() != null) {
 			try {
 				room = Room.serializeFromJson(response.getData());
+				room.setToken(mToken);
 			} catch(JSONException ex) {
 				ex.printStackTrace();
 			}
@@ -71,7 +72,9 @@ public class Site {
 				rooms = new ArrayList<Room>();
 				JSONArray roomsJson = response.getData().getJSONArray("rooms");
 				for(int i = 0; i < roomsJson.length(); i++) {
-					rooms.add(Room.serializeFromJson(roomsJson.getJSONObject(i)));
+					Room room = Room.serializeFromJson(roomsJson.getJSONObject(i));
+					room.setToken(mToken);
+					rooms.add(room);
 				}
 			} catch(JSONException ex) {
 				ex.printStackTrace();
