@@ -64,6 +64,10 @@ class Request {
 
 		return result;
 	}
+	
+	public Response post(URI target) {
+		return this.post(target, new JSONObject());
+	}
 
 	public Response post(URI target, JSONObject json) {
 		HttpHost targetHost = new HttpHost(target.getHost(), target.getPort(), target.getScheme());
